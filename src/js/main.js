@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var _ = require('underscore');
 $ = require('jquery');// jshint ignore:line
 jQuery = require('jquery');// jshint ignore:line
-var dragdropPlugin = require('./vendor/jquery.drag-drop.plugin.min.js');// jshint ignore:line
+require('./vendor/jquery.drag-drop.plugin.min.js');// jshint ignore:line
 
 var colors = ['red', 'purple', 'green', 'black', 'white'];
 
@@ -30,8 +30,8 @@ var Location = Backbone.Model.extend({
 });
 var Speed = Backbone.Model.extend({
     defaults: {
-        name :'',
-        wavURL:'undefined.wav'
+        name: '',
+        wavURL: 'undefined.wav'
     }
 });
 
@@ -46,7 +46,7 @@ var Locations = Backbone.Collection.extend({
     model: Location
 });
 var Speeds = Backbone.Collection.extend({
-    model:Speed
+    model: Speed
 });
 
 var allDancers = new Dancers();
@@ -136,15 +136,15 @@ allDancers.add(dancer3);
 allDancers.add(dancer4);
 
 var speed1 = new Speed({
-    name:'slow'
+    name: 'slow'
 });
 
 var speed2 = new Speed({
-    name:'medium'
+    name: 'medium'
 });
 
 var speed3 = new Speed({
-    name:'fast'
+    name: 'fast'
 });
 
 allSpeeds.add(speed1);
@@ -306,6 +306,72 @@ var DancersView = Backbone.View.extend({
     }
 });
 
+/*
+ var Order = Backbone.Model.extend({
+ default: {
+ speed: medium,
+ dancers: new Dancers(),
+ actions: new Actions(),
+ location:new Location({}
+ )
+ }
+ });
+ var Orders = Backbone.Collection.extend({
+ model:Order
+ });
+ */
+/*
+ var OrderView = Backbone.View.extend({
+
+ className: 'order',
+
+ template: _.template($('#order_template').html()),
+ render: function () {
+ this.$el.html(this.template());
+ this.model.get('dancers').each(function (dancer) {
+ var dancerView = new DancerView(dancer);
+ this.$el.find('.order_dancers').append(dancerView.render());
+ });
+ this.model.get('locations').each(function (location) {
+ var locationView = new LocationView(location);
+ this.$el.find('.order_locations').append(locationView.render());
+ });
+ this.model.get('actions').each(function (action) {
+ var actionView = new ActionView(action);
+ this.$el.find('.order_actions').append(actionView.render());
+ });
+ this.$el.html(this.template(this.model.attributes));
+ this.$el.attr("data-id", this.model.cid);
+ return this;
+ }
+
+ });
+ var OrdersView = Backbone.View.extend({
+ el: "#orders",
+ initialize: function () {
+ this.$el.html('');
+ this.render();
+ },
+ render: function () {
+ allOrders.each(function (model) {
+ var order = new OrderView({
+ model: model
+ });
+ this.$el.append(order.render().el);
+ }.bind(this));
+ $("#orders > .order").dragdrop({
+ makeClone: true,
+ dragClass: "whileDragging",
+ didDrop: this.onOrderDropped.bind(this)
+ });
+ return this;
+ },
+ onOrderDropped: function ($src, $dst) {
+ window.alert("location dropped");
+ console.log($src, $dst);
+ }
+ });
+ */
 var dancerView = new DancersView();
 var actionView = new ActionsView();
 var locationsView = new LocationsView();
