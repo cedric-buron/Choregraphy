@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/appli.css">
+
+</head>
+<body>
+<div id="#app">
+    <div class="to_group">
+        <h1>Dancers</h1>
+        <div id="dancers"></div>
+    </div>
+    <div class="to_group">
+        <h1>Actions</h1>
+        <div id="actions"></div>
+    </div>
+    <div class="to_group">
+        <h1>Locations</h1>
+        <div id="locations"></div>
+    </div>
+    <div class="to_group">
+        <h1>Speeds</h1>
+        <div id="speeds"></div>
+    </div>
+    <div class="drop"></div>
+    <div id="command"></div>
+</div>
+<script type="text/template" id="dancer_template">
+    <div class="profil"  style="background-image:url(<%= imgURL %>);border-color:<%= color %>"></div>
+    <div class="name"><%= name %></div>
+</script>
+<script type="text/template" id="action_template">
+    <div class="action-label" ><%= name %></div>
+</script>
+<script type="text/template" id="speed_template">
+    <div class="speed-label" ><%= name %></div>
+</script>
+<script type="text/template" id="location_template">
+    <div class="location-label" ><%= name %></div>
+</script>
+<script type="text/template" id="order_template">
+   <div class="order_dancers"></div>
+   <div class="order_location"></div>
+   <div class="order_actions"></div>
+    <div class="btn_action js_btn_action">Launch</div>
+</script>
+<script src="js/build.js"></script>
+</body>
+</html>

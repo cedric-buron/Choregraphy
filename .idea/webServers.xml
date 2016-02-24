@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9c431d91-8fdf-421e-adf5-069000ea50eb" name="choregraphy" url="http://mybe.co:3980">
+        <fileTransfer host="mybe.co" port="3922" rootFolder="/public_html" accessType="SFTP" password="dfc2dfc1df85df9bdf9bdf9b" username="hk">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
