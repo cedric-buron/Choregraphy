@@ -119,69 +119,6 @@ allSpeeds.add(slow);
 allSpeeds.add(medium);
 allSpeeds.add(fast);
 
-//
-//VIEW
-//
-
-
-/*
-
- var Orders = Backbone.Collection.extend({
- model:Order
- });
- */
-/*
- var OrderView = Backbone.View.extend({
-
- className: 'order',
-
- template: _.template($('#order_template').html()),
- render: function () {
- this.$el.html(this.template());
- this.model.get('dancers').each(function (dancer) {
- var dancerView = new DancerView(dancer);
- this.$el.find('.order_dancers').append(dancerView.render());
- });
- this.model.get('locations').each(function (location) {
- var locationView = new LocationView(location);
- this.$el.find('.order_locations').append(locationView.render());
- });
- this.model.get('actions').each(function (action) {
- var actionView = new ActionView(action);
- this.$el.find('.order_actions').append(actionView.render());
- });
- this.$el.html(this.template(this.model.attributes));
- this.$el.attr("data-id", this.model.cid);
- return this;
- }
-
- });
- var OrdersView = Backbone.View.extend({
- el: "#orders",
- initialize: function () {
- this.$el.html('');
- this.render();
- },
- render: function () {
- allOrders.each(function (model) {
- var order = new OrderView({
- model: model
- });
- this.$el.append(order.render().el);
- }.bind(this));
- $("#orders > .order").dragdrop({
- makeClone: true,
- dragClass: "whileDragging",
- didDrop: this.onOrderDropped.bind(this)
- });
- return this;
- },
- onOrderDropped: function ($src, $dst) {
- window.alert("location dropped");
- console.log($src, $dst);
- }
- });
- */
 var dancerView    = new DancersView({
     model: allDancers
 });

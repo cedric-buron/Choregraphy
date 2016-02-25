@@ -11,7 +11,6 @@ var DancersView = Backbone.View.extend({
         this.render();
     },
     render: function () {
-        console.log(this.model);
         this.model.each(function (model) {
             var dancer = new DancerView({
                 model: model

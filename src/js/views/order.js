@@ -15,22 +15,32 @@ var OrderView = Backbone.View.extend({
     className: 'order',
 
     template: _.template($('#order_template').html()),
-    render: function () {
+    initialize : function() {
         this.$el.html(this.template());
+    },
+    appendViewToClassElt: function(view, classElt) {
+        this.$el.find(classElt).append(view.render().$el);
+    },
+    renderDancers: function () {
         this.model.get('dancers').each(function (dancer) {
             var dancerView = new DancerView({model: dancer});
-            this.$el.find('.order_dancers').append(dancerView.render().el);
-            console.log(this.$el[0]);
+            this.appendViewToClassElt(dancerView,'.order_dancers');
         }.bind(this));
+    },
+    renderLocation: function () {
         var locationView = new LocationView({model: this.model.get('location')});
-        this.$el.find('.order_locations').append(locationView.render().el);
+        this.appendViewToClassElt(locationView,'.order_location');
+    },
+    renderActions: function() {
         this.model.get('actions').each(function (action) {
             var actionView = new ActionView({model: action});
-            this.$el.find('.order_actions').append(actionView.render().el);
+            this.appendViewToClassElt(actionView,'.order_actions');
         }.bind(this));
-        var bloc = this.template(this.model.attributes);
-        this.$el.html(bloc);
-
+    },
+    render: function () {
+        this.renderDancers();
+        this.renderLocation();
+        this.renderActions();
         this.$el.attr("data-id", this.model.cid);
         return this;
     }

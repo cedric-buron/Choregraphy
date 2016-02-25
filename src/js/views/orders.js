@@ -12,7 +12,6 @@ var OrdersView = Backbone.View.extend({
         this.render();
     },
     render: function () {
-        console.log("renderinf");
         this.model.each(function (model) {
             var orderView = new OrderView({model: model});
             this.$el.append(orderView.render().el);
