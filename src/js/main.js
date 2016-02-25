@@ -195,13 +195,16 @@ var speedView     = new SpeedsView({
     model: allSpeeds
 });
 
-var order = new Order();
+var order = new Order({
+    dancers:allDancers,
+    actions:allActions,
+    location:location1
+});
 order.set('dancers',allDancers);
 order.set('actions',allActions);
 order.set('location',location1);
 var orders =new Orders();
 orders.add(order);
-console.log("ert",orders);
 var orderView     = new OrdersView({ model: orders });
 
 dancerView.initialize();

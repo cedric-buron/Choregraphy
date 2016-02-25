@@ -14,8 +14,7 @@ var Order      = Backbone.Model.extend({
         }),
         dancers: new Dancers(),
         actions: new Actions(),
-        location: new Location({}
-        )
+        location: new Location()
     }
 });
 module.exports = Order;
