@@ -17,6 +17,7 @@ var OrderView = Backbone.View.extend({
     template: _.template($('#order_template').html()),
     initialize : function() {
         this.$el.html(this.template());
+        this.model.on('change', this.render, this);
     },
     appendViewToClassElt: function(view, classElt) {
         this.$el.find(classElt).append(view.render().$el);
@@ -38,6 +39,7 @@ var OrderView = Backbone.View.extend({
         }.bind(this));
     },
     render: function () {
+        this.$el.html('');
         this.renderDancers();
         this.renderLocation();
         this.renderActions();

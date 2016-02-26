@@ -4,6 +4,8 @@
 var Backbone   = require('backbone');
 var $ = require('jquery');
 var DancerView = require('./dancer.js');
+var Radio = require('backbone.radio');
+var DancersChannel = Radio.channel('dancers');
 var DancersView = Backbone.View.extend({
     el: "#dancers",
     initialize: function () {
@@ -26,9 +28,8 @@ var DancersView = Backbone.View.extend({
         return this;
     },
     onDancerDropped: function ($src, $dst) {
-        window.alert("dancer dropped");
-        console.log($src, $dst);
-        console.log(this.model.get({'cid': $src.attr("data-id")}));
+        Radio.trigger('dancers', 'dancer:added', this.model.get({'cid': $src.attr("data-id")}));
+        //console.log(this.model.get({'cid': $src.attr("data-id")}));
     }
 });
 module.exports = DancersView;

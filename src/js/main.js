@@ -137,18 +137,6 @@ var order = new Order({
     actions:allActions,
     location:location1
 });
-order.set('dancers',allDancers);
-order.set('actions',allActions);
-order.set('location',location1);
-var orders =new Orders();
-orders.add(order);
-var orderView     = new OrdersView({ model: orders });
-
-dancerView.initialize();
-actionView.initialize();
-locationsView.initialize();
-speedView.initialize();
-orderView.initialize();
 
 
 //add speed playing between action
