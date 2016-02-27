@@ -17,6 +17,11 @@ var LocationsView = require('./views/locations.js');
 var SpeedsView    = require('./views/speeds.js');
 var OrdersView    = require('./views/orders.js');
 
+
+var DancersChannel = Radio.channel('dancers');
+var LocationChannel = Radio.channel('dancers');
+var ActionsChannel = Radio.channel('dancers');
+
 var slow = new Speed({
     name: 'slow'
 });
@@ -118,6 +123,8 @@ allDancers.add(dancer4);
 allSpeeds.add(slow);
 allSpeeds.add(medium);
 allSpeeds.add(fast);
+
+
 
 var dancerView    = new DancersView({
     model: allDancers

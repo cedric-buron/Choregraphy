@@ -4,6 +4,7 @@
 var Backbone   = require('backbone');
 var $ = require('jquery');
 var ActionView = require('./action.js');
+var ActionsChannel = Radio.channel('actions');
 var ActionsView = Backbone.View.extend({
     el: "#actions",
     initialize: function () {
@@ -25,8 +26,8 @@ var ActionsView = Backbone.View.extend({
         return this;
     },
     onActionDropped: function ($src, $dst) {
-        window.alert("action dropped");
-        console.log($src, $dst);
+        Radio.trigger('actions', 'action:added', this.model.get({'cid': $src.attr("data-id")}));
+        //console.log(this.model.get({'cid': $src.attr("data-id")}));
     }
 });
 module.exports = ActionsView;

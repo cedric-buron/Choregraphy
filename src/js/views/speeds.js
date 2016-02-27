@@ -4,6 +4,7 @@
 var Backbone   = require('backbone');
 var $ = require('jquery');
 var SpeedView = require('./speed.js');
+var SpeedChannel = Radio.channel('speed');
 var SpeedsView = Backbone.View.extend({
     el: "#speeds",
     initialize: function () {
@@ -25,8 +26,8 @@ var SpeedsView = Backbone.View.extend({
         return this;
     },
     onSpeedDropped: function ($src, $dst) {
-        window.alert("speed dropped");
-        console.log($src, $dst);
+        Radio.trigger('speed', 'speed:added', this.model.get({'cid': $src.attr("data-id")}));
+        //console.log(this.model.get({'cid': $src.attr("data-id")}));
     }
 });
 module.exports = SpeedsView;

@@ -1,6 +1,7 @@
 var Backbone   = require('backbone');
 var $ = require('jquery');
-var LocationView = require('./location.js')
+var LocationView = require('./location.js');
+var SpeedChannel = Radio.channel('speed');
 var LocationsView = Backbone.View.extend({
     el: "#locations",
     initialize: function () {
@@ -22,8 +23,8 @@ var LocationsView = Backbone.View.extend({
         return this;
     },
     onLocationDropped: function ($src, $dst) {
-        window.alert("location dropped");
-        console.log($src, $dst);
+        Radio.trigger('location', 'location:added', this.model.get({'cid': $src.attr("data-id")}));
+        //console.log(this.model.get({'cid': $src.attr("data-id")}));
     }
 });
 module.exports = LocationsView;
