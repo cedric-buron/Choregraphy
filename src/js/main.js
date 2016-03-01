@@ -1,6 +1,7 @@
 $      = require('jquery');// jshint ignore:line
 jQuery = require('jquery');// jshint ignore:line
 require('./vendor/jquery.drag-drop.plugin.min.js');// jshint ignore:line
+var Radio = require('backbone.radio');
 var Dancer        = require('./models/dancer.js');
 var Dancers       = require('./models/dancers.js');
 var Action        = require('./models/action.js');
@@ -10,17 +11,22 @@ var Locations     = require('./models/locations.js');
 var Speed         = require('./models/speed.js');
 var Speeds        = require('./models/speeds.js');
 var Order         = require('./models/order.js');
-var Orders        = require('./models/orders.js');
+//var Orders        = require('./models/orders.js');
 var DancersView   = require('./views/dancers.js');
 var ActionsView   = require('./views/actions.js');
 var LocationsView = require('./views/locations.js');
 var SpeedsView    = require('./views/speeds.js');
-var OrdersView    = require('./views/orders.js');
+var OrderView    = require('./views/order.js');
+//var OrdersView    = require('./views/orders.js');
+
+var APP = {};
+
+APP.DancersChannel = Radio.channel('dancer');
+APP.LocationChannel = Radio.channel('location');
+APP.ActionsChannel = Radio.channel('action');
+APP.SpeedsChannel  = Radio.channel('speed');
 
 
-var DancersChannel = Radio.channel('dancers');
-var LocationChannel = Radio.channel('dancers');
-var ActionsChannel = Radio.channel('dancers');
 
 var slow = new Speed({
     name: 'slow'
@@ -34,10 +40,10 @@ var fast = new Speed({
     name: 'fast'
 });
 
-var allDancers   = new Dancers();
-var allActions   = new Actions();
-var allLocations = new Locations();
-var allSpeeds    = new Speeds();
+APP.allDancers   = new Dancers();
+APP.allActions   = new Actions();
+APP.allLocations = new Locations();
+APP.allSpeeds    = new Speeds();
 
 var location1 = new Location({
     name: 'table'
@@ -55,11 +61,11 @@ var location5 = new Location({
     name: 'ouest'
 });
 
-allLocations.add(location1);
-allLocations.add(location2);
-allLocations.add(location3);
-allLocations.add(location4);
-allLocations.add(location5);
+APP.allLocations.add(location1);
+APP.allLocations.add(location2);
+APP.allLocations.add(location3);
+APP.allLocations.add(location4);
+APP.allLocations.add(location5);
 
 
 var action1 = new Action({
@@ -84,11 +90,11 @@ var action5 = new Action({
     wavURL: 'notDefined.mp3'
 });
 
-allActions.add(action1);
-allActions.add(action2);
-allActions.add(action3);
-allActions.add(action4);
-allActions.add(action5);
+APP.allActions.add(action1);
+APP.allActions.add(action2);
+APP.allActions.add(action3);
+APP.allActions.add(action4);
+APP.allActions.add(action5);
 
 var dancer1 = new Dancer({
     name: 'elise',
@@ -115,36 +121,52 @@ var dancer4 = new Dancer({
     color: 'yellow'
 });
 
-allDancers.add(dancer1);
-allDancers.add(dancer2);
-allDancers.add(dancer3);
-allDancers.add(dancer4);
+APP.allDancers.add(dancer1);
+APP.allDancers.add(dancer2);
+APP.allDancers.add(dancer3);
+APP.allDancers.add(dancer4);
 
-allSpeeds.add(slow);
-allSpeeds.add(medium);
-allSpeeds.add(fast);
+APP.allSpeeds.add(slow);
+APP.allSpeeds.add(medium);
+APP.allSpeeds.add(fast);
 
 
 
-var dancerView    = new DancersView({
-    model: allDancers
+APP.dancerView    = new DancersView({
+    model: APP.allDancers
 });
-var actionView    = new ActionsView({
-    model: allActions
+APP.actionView    = new ActionsView({
+    model: APP.allActions
 });
-var locationsView = new LocationsView({
-    model: allLocations
+APP.locationsView = new LocationsView({
+    model: APP.allLocations
 });
-var speedView     = new SpeedsView({
-    model: allSpeeds
-});
-
-var order = new Order({
-    dancers:allDancers,
-    actions:allActions,
-    location:location1
+APP.speedView     = new SpeedsView({
+    model: APP.allSpeeds
 });
 
+var orderModel = new Order();
+//orderModel.initialize();
+var orderView = new OrderView({model:orderModel});
+console.log(orderModel);
+
+APP.LocationChannel.on('location:added', function (location) {
+    orderModel.changeLocation(location);
+    console.log(orderView.render().el);
+    $('.preview').append(orderView.render().el);
+});
+APP.ActionsChannel.on('action:added', function (action) {
+    orderModel.addAction(action);
+    $('.preview').append(orderView.render().el);
+});
+APP.DancersChannel.on('dancer:added', function (dancer) {
+    orderModel.addDancer(dancer);
+    $('.preview').append(orderView.render().el);
+});
+APP.SpeedsChannel.on('speed:added', function (speed) {
+    orderModel.changeSpeed(speed);
+    $('.preview').append(orderView.render().el);
+});
 
 //add speed playing between action
 //groupe de dancer preselection

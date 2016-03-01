@@ -4,7 +4,7 @@
 var Backbone   = require('backbone');
 var $ = require('jquery');
 var SpeedView = require('./speed.js');
-var SpeedChannel = Radio.channel('speed');
+var Radio = require('backbone.radio');
 var SpeedsView = Backbone.View.extend({
     el: "#speeds",
     initialize: function () {

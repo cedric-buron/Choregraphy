@@ -13,12 +13,14 @@ var DancersView = Backbone.View.extend({
         this.render();
     },
     render: function () {
-        this.model.each(function (model) {
-            var dancer = new DancerView({
-                model: model
-            });
-            this.$el.append(dancer.render().el);
-        }.bind(this));
+        if(this.model.length) {
+            this.model.each(function (model) {
+                var dancer = new DancerView({
+                    model: model
+                });
+                this.$el.append(dancer.render().el);
+            }.bind(this));
+        }
         $("#dancers > .dancer").dragdrop({
             makeClone: true,
             dragClass: "whileDragging",
@@ -28,8 +30,7 @@ var DancersView = Backbone.View.extend({
         return this;
     },
     onDancerDropped: function ($src, $dst) {
-        Radio.trigger('dancers', 'dancer:added', this.model.get({'cid': $src.attr("data-id")}));
-        //console.log(this.model.get({'cid': $src.attr("data-id")}));
+        Radio.trigger('dancer', 'dancer:added', this.model.get({'cid': $src.attr("data-id")}));
     }
 });
 module.exports = DancersView;

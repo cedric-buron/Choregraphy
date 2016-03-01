@@ -8,13 +8,24 @@ var Location = require('./location.js');
 var Speed    = require('./speed.js');
 
 var Order      = Backbone.Model.extend({
-    default: {
-        speed: new Speed({
-            name: 'medium'
-        }),
-        dancers: new Dancers(),
-        actions: new Actions(),
-        location: new Location()
+    speed:new Speed({
+        name: 'medium'
+    }),
+    dancers:new Dancers(),
+    actions:new Actions(),
+    location:new Location(),
+    addDancer: function (dancer) {
+        this.dancers.add(dancer);
+    },
+    addAction: function (action) {
+        console.log(this);
+        this.actions.add(action);
+    },
+    changeLocation : function(location) {
+        this.location = location;
+    },
+    changeSpeed : function (speed) {
+        this.speed = speed;
     }
 });
 module.exports = Order;

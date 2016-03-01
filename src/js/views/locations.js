@@ -1,7 +1,7 @@
 var Backbone   = require('backbone');
 var $ = require('jquery');
 var LocationView = require('./location.js');
-var SpeedChannel = Radio.channel('speed');
+var Radio = require('backbone.radio');
 var LocationsView = Backbone.View.extend({
     el: "#locations",
     initialize: function () {
@@ -9,12 +9,14 @@ var LocationsView = Backbone.View.extend({
         this.render();
     },
     render: function () {
-        this.model.each(function (model) {
-            var location = new LocationView({
-                model: model
-            });
-            this.$el.append(location.render().el);
-        }.bind(this));
+        if(this.model.length) {
+            this.model.each(function (model) {
+                var location = new LocationView({
+                    model: model
+                });
+                this.$el.append(location.render().el);
+            }.bind(this));
+        }
         $("#locations > .location").dragdrop({
             makeClone: true,
             dragClass: "whileDragging",

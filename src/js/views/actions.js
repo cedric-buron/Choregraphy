@@ -4,6 +4,7 @@
 var Backbone   = require('backbone');
 var $ = require('jquery');
 var ActionView = require('./action.js');
+var Radio = require('backbone.radio');
 var ActionsChannel = Radio.channel('actions');
 var ActionsView = Backbone.View.extend({
     el: "#actions",
@@ -12,12 +13,14 @@ var ActionsView = Backbone.View.extend({
         this.render();
     },
     render: function () {
-        this.model.each(function (model) {
-            var action = new ActionView({
-                model: model
-            });
-            this.$el.append(action.render().el);
-        }.bind(this));
+        if(this.model.length) {
+            this.model.each(function (model) {
+                var action = new ActionView({
+                    model: model
+                });
+                this.$el.append(action.render().el);
+            }.bind(this));
+        }
         $("#actions > .action").dragdrop({
             makeClone: true,
             dragClass: "whileDragging",
@@ -26,7 +29,7 @@ var ActionsView = Backbone.View.extend({
         return this;
     },
     onActionDropped: function ($src, $dst) {
-        Radio.trigger('actions', 'action:added', this.model.get({'cid': $src.attr("data-id")}));
+        Radio.trigger('action', 'action:added', this.model.get({'cid': $src.attr("data-id")}));
         //console.log(this.model.get({'cid': $src.attr("data-id")}));
     }
 });
