@@ -22,22 +22,22 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 12px;
     color: black;
 
 }
 
 .action, .location, .speed {
     background-color: #CCC;
-    border: solid 1px black;
-    font-size: 1.25em;
     border-radius: 5%;
     margin: 5px;
-    padding-left: 1em;
-    padding-right: 1em;
     cursor: pointer;
     color: black;
 
+}
+
+.speed-label, .location-label, .action-label {
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 .to_group {
@@ -98,13 +98,12 @@ html, body {
     overflow: hidden;
     text-align: center;
     color: white;
-    font-size: .75em;
 }
 
 .drop.zone {
-    width:75%;
-    float:left;
-    height:200px;
+    width: 75%;
+    float: left;
+    min-height: 200px;
     max-width: calc(100% - 200px);
 }
 
@@ -118,11 +117,13 @@ h1 {
     display: block;
     width: 12.5%;
 }
+
 .order_dancers {
-    margin:auto;
+    margin: auto;
     width: auto;
     text-align: center;
 }
+
 .order .dancer {
     margin: 2px;
     display: inline-block;
@@ -131,7 +132,7 @@ h1 {
 .order .dancer > .profil {
     width: 23px;
     height: 23px;
-    border-width: 1 px;
+    border-width: 1px;
 }
 
 .order .dancer > .name {
@@ -140,27 +141,30 @@ h1 {
 
 .order .action, .order .location {
     width: 100%;
-    font-size: 10px;
+    font-size: 1em;
     font-weight: normal;
 }
+
 .preview {
     float: left;
     width: 25%;
-    background-color: #2b81af;
+    background-color: #333;
     display: block;
-    height: 200px;
+    min-height: 200px;
     min-width: 200px;
 }
+
 .preview .order {
-    width:100%;
+    width: 100%;
 }
+
 .preview .action, .preview .location, .preview .speed {
-    display:block;
-    width:auto;
-    float:left;
+    display: block;
+    width: auto;
+    float: left;
     background-color: #EEE;
     border: none;
-    font-size: .825em;
+    font-size: 1em;
     border-radius: 0;
     margin-left: 2px;
     cursor: pointer;
@@ -170,21 +174,59 @@ h1 {
 }
 
 .preview .action {
-    color:red;
+    display: inline-block;
+    height: 1em;
+    padding-left: .0625em;
+    padding-right: .0625em;
+    color: red;
+    line-height: 1em;
 }
-.preview  .order_actions {
-    float:none;
-    clear:both;
+
+.preview .action:last-child {
+    float-right: none;
+    clear: both;
+}
+
+.preview .order_actions {
+    float: none;
+    clear: both;
     display: block;
-    width:100%;
+    width: 100%;
 }
+
 .preview .location {
-    color:green;
-    float:none;
+    color: green;
+    float: none;
     clear: both;
 }
+
 .preview .speed {
-    color:blue;
-    float:none;
+    color: blue;
+    float: none;
     clear: both;
+}
+
+.btn_action {
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 10%;
+    background-color: #444;
+    color: white;
+    /* text-align: center; */
+    width: 100px;
+    margin: auto;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: block;
+    text-align: center;
+    position: relative;
+    height: 1em;
+}
+
+.container {
+    float: none;
+    clear: both;
+    display: block;
+    position: relative;
+    width: 100%;
 }

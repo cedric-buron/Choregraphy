@@ -44,10 +44,10 @@
     <div class="action-label"><%= name %></div>
 </script>
 <script type="text/template" id="speed_template">
-    <div class="speed-label"><%= name %></div>
+    <div class="speed-label"><% if(obj.name) {%>Speed : <%= name %><%}%></div>
 </script>
 <script type="text/template" id="location_template">
-    <div class="location-label"><%= name %></div>
+    <div class="location-label"><% if(obj.name) {%>Location : <%= name %><%}%></div>
 </script>
 <script type="text/template" id="order_template">
     <div class="container">
@@ -55,9 +55,9 @@
         <div class="order_location"></div>
         <div class="order_dancers"></div>
         <div class="order_actions"></div>
-        <div class="btn_action js_btn_action">Hide</div>
     </div>
-        <div class="btn_action js_btn_action">Launch</div>
+    <div class="btn_action js_btn_action">Hide</div>
+    <div class="btn_action js_btn_action">Launch</div>
 </script>
 <script src="js/build.js"></script>
 </body>
